@@ -48,7 +48,7 @@ fetch("https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty")
             <div>
                 <a href="${data.url}">${data.title}</a>
                 <div>
-                    ${data.score} by ${data.by} 
+                    ${data.score} points by ${data.by} 
                 </div>
             </div>
             `
