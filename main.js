@@ -19,33 +19,40 @@ fetch("https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty")
     })
     
 .then(function(data){
-    let arr = data.slice(0, 99);
+    let arr = data.slice(0, 100);
     //console.log(arr);
 
     //loop through arr to grag each story number:
-        for (let i = 0; i < arr.length; i++){
-            let storyID = arr[i]
 
-            //put story number in api format
-            fetch(`https:hacker-news.firebaseio.com/v0/item/${storyID}.json?print=pretty`)
-            
-            .then(function(httpReponse){
-                return httpReponse.json();
-            })
+    //create ol:
+    let storyList = document.createElement("ol");
+    parent.appendChild(storyList);
 
-            .then(function(data){
+    for (let i = 0; i < arr.length; i++){
+        let storyID = arr[i]
 
-                let child = document.createElement('div');
-                child.className = 'child';
-
-                let story = document.createElement("li");
-                story.innerText = data.title;
-
-                child.appendChild(story);
-                parent.appendChild(child);
+        //put story number in api format
+        fetch(`https:hacker-news.firebaseio.com/v0/item/${storyID}.json?print=pretty`)
                 
-            })
-
-            }
+        .then(function(httpReponse){
+            return httpReponse.json();
         })
+
+        .then(function(data){
+
+            let child = document.createElement('div');
+            child.className = 'child';
+
+            let story = document.createElement("li");
+            story.innerText = data.title;
+
+            child.appendChild(story);
+            storyList.appendChild(child);
+
+                    
+        })
+
+    }
+
+})
 
